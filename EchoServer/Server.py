@@ -10,5 +10,9 @@ while True:
     print('Server got connection from {}'.format(addr))
     req = conn.recv(1024)
     msg = req.decode()
-    conn.send(msg.encode())
+    while msg:
+        print("Client say: " + msg)
+        conn.send(msg.encode())
+        req = conn.recv(1024)
+        msg = req.decode()
     conn.close()
